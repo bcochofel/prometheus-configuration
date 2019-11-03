@@ -1,0 +1,62 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+  external_labels:
+    dc: dc1
+
+alerting:
+  alert_relabel_configs:
+    - regex: 'alloc_name'
+      action: labeldrop
+  alertmanagers:
+  - consul_sd_configs:
+    - server: 'localhost:8500'
+      services: ['alertmanager']
+
+# File with the rules
+rule_files:
+  - "*.rules.yml"
+
+scrape_configs:
+
+  # nomad metrics
+  - job_name: 'nomad_metrics'
+    consul_sd_configs:
+    - server: 'localhost:8500'
+      services: ['nomad-client', 'nomad']
+    relabel_configs:
+    - source_labels: ['__meta_consul_tags']
+      regex: '(.*)http(.*)'
+      action: keep
+    scrape_interval: 5s
+    metrics_path: "/v1/metrics"
+    params:
+      format: ['prometheus']
+
+  # consul metrics
+  - job_name: 'consul_metrics'
+    consul_sd_configs:
+      - server: 'localhost:8500'
+        services: ['consul-metrics']
+    metrics_path: "/v1/agent/metrics"
+    params:
+      format: ['prometheus']
+
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'consul_service'
+    consul_sd_configs:
+      - server: 'localhost:8500'
+        tags: ['prometheus']
+    relabel_configs:
+      - source_labels: ['__meta_consul_dc']
+        target_label:  'dc'
+      - source_labels: ['__meta_consul_node']
+        target_label:  'host'
+      - source_labels: [__meta_consul_service]
+        target_label: job
+      - source_labels: ['__meta_consul_tags']
+        target_label: 'tags'
+      - source_labels: ['__meta_consul_tags']
+        regex: '.*,([^=]+)=([^,]+),.*'
+        replacement: '${2}'
+        target_label: '${1}'

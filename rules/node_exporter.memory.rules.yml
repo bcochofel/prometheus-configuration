@@ -1,0 +1,64 @@
+groups:
+# Node exporter rules for Memory
+- name: Node Exporter Memory rules
+  rules:
+    ### Memory alerts ###
+    
+    # Memory saturation with major page faults
+    - alert: Memory-HighSaturation
+      expr: >
+        ((
+          node_memory_MemAvailable_bytes or
+          (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)
+        ) / node_memory_MemTotal_bytes) * 100 < 5 and 
+        rate(node_vmstat_pgmajfault[1m]) > 1000
+      for: 15m
+      labels:
+        severity: critical
+        team: devops
+      annotations:
+        title: Memory saturation is high.
+        summary: Memory saturation is high.
+        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
+        graph: 'http://grafana.example.com'
+        description: |
+          Memory saturation is high and major page faults above 1000 for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+          Current value is {{ printf "%.2f" $value }}%.
+
+    # Memory is filling up
+    - alert: Memory-FillingUp
+      expr: >
+        (
+          node_memory_MemFree_bytes + node_memory_Cached_bytes + node_memory_Buffers_bytes
+        ) / node_memory_MemTotal_bytes * 100 < 10
+      for: 15m
+      labels:
+        severity: warning
+        team: devops
+      annotations:
+        title: Memory is filling up.
+        summary: Memory is filling up.
+        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
+        graph: 'http://grafana.example.com'
+        description: |
+          Memory is filling up (< 10% left) for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+          Current value is {{ printf "%.2f" $value }}%.
+
+    # SWAP high utilization
+    - alert: SWAP-HighUtilization
+      expr: >
+        (
+          ((node_memory_SwapTotal - node_memory_SwapFree) / node_memory_SwapTotal) * 100
+        ) > 95
+      for: 15m
+      labels:
+        severity: warning
+        team: devops
+      annotations:
+        title: SWAP high utilization.
+        summary: SWAP high utilization.
+        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
+        graph: 'http://grafana.example.com'
+        description: |
+          SWAP utilization above 95% for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+          Current value is {{ printf "%.2f" $value }}%.
