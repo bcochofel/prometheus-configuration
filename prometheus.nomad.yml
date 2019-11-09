@@ -15,7 +15,7 @@ alerting:
 
 # File with the rules
 rule_files:
-  - "*.rules.yml"
+  - "rules/*.rules.yml"
 
 # Remote Read/Write to/from M3DB
 #remote_read:

@@ -1,62 +1,45 @@
 global:
   scrape_interval:     15s
   evaluation_interval: 15s
-  external_labels:
-    dc: dc1
+  #external_labels:
+  #  dc: dc1
 
 alerting:
-  alert_relabel_configs:
-    - regex: 'alloc_name'
-      action: labeldrop
   alertmanagers:
-  - consul_sd_configs:
-    - server: 'localhost:8500'
-      services: ['alertmanager']
+    - static_configs:
+      - targets: ['localhost:9093']
 
-# File with the rules
+# load rules files
 rule_files:
-  - "*.rules.yml"
+  - "rules/*.rules.yml"
+
+# remote read/write to/from M3DB
+#remote_read:
+#  - url: 'http://m3db-server:7201/api/v1/prom/remote/read'
+#    # to test reading even when local Prometheus has the data
+#    read_recent: true
+#remote_write:
+#  - url: 'http://m3db-server:7201/api/v1/prom/remote/write
 
 scrape_configs:
+  # prometheus targets
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  
+  # alertmanager targets
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets: ['localhost:9093']
 
-  # nomad metrics
-  - job_name: 'nomad_metrics'
-    consul_sd_configs:
-    - server: 'localhost:8500'
-      services: ['nomad-client', 'nomad']
-    relabel_configs:
-    - source_labels: ['__meta_consul_tags']
-      regex: '(.*)http(.*)'
-      action: keep
-    scrape_interval: 5s
-    metrics_path: "/v1/metrics"
-    params:
-      format: ['prometheus']
+  # node_exporter targets
+  - job_name: 'node_exporter'
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/node_exporter-targets.json
 
-  # consul metrics
-  - job_name: 'consul_metrics'
-    consul_sd_configs:
-      - server: 'localhost:8500'
-        services: ['consul-metrics']
-    metrics_path: "/v1/agent/metrics"
-    params:
-      format: ['prometheus']
-
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'consul_service'
-    consul_sd_configs:
-      - server: 'localhost:8500'
-        tags: ['prometheus']
-    relabel_configs:
-      - source_labels: ['__meta_consul_dc']
-        target_label:  'dc'
-      - source_labels: ['__meta_consul_node']
-        target_label:  'host'
-      - source_labels: [__meta_consul_service]
-        target_label: job
-      - source_labels: ['__meta_consul_tags']
-        target_label: 'tags'
-      - source_labels: ['__meta_consul_tags']
-        regex: '.*,([^=]+)=([^,]+),.*'
-        replacement: '${2}'
-        target_label: '${1}'
+  # telegraf targets
+  - job_name: 'telegraf'
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/telegraf-targets.json
