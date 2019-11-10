@@ -8,7 +8,7 @@ groups:
     - alert: CPU-HighUtilization
       expr: >
         100 - (avg by (instance, host) (
-          irate(node_cpu_seconds_total{job="node_exporter",mode="idle"}[5m])) * 100
+          irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100
         ) > 85
       for: 15m
       labels:
