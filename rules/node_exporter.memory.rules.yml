@@ -15,12 +15,9 @@ groups:
       for: 15m
       labels:
         severity: critical
-        team: devops
+        team: linux-systems
       annotations:
-        title: Memory saturation is high.
         summary: Memory saturation is high.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           Memory saturation is high and major page faults above 1000 for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.
@@ -34,12 +31,9 @@ groups:
       for: 15m
       labels:
         severity: warning
-        team: devops
+        team: linux-systems
       annotations:
-        title: Memory is filling up.
         summary: Memory is filling up.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           Memory is filling up (< 10% left) for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.
@@ -53,12 +47,9 @@ groups:
       for: 15m
       labels:
         severity: warning
-        team: devops
+        team: linux-systems
       annotations:
-        title: SWAP high utilization.
         summary: SWAP high utilization.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           SWAP utilization above 95% for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.

@@ -8,17 +8,14 @@ groups:
     - alert: CPU-HighUtilization
       expr: >
         100 - (avg by (instance, host) (
-          irate(node_cpu_seconds_total{job="node-exporter",mode="idle"}[5m])) * 100
+          irate(node_cpu_seconds_total{job="node_exporter",mode="idle"}[5m])) * 100
         ) > 85
       for: 15m
       labels:
         severity: warning
-        team: devops
+        team: linux-systems
       annotations:
-        title: CPU utilization is high.
         summary: CPU utilization is high.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           CPU utilization is above 85% for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.
@@ -30,12 +27,9 @@ groups:
       for: 15m
       labels:
         severity: critical
-        team: devops
+        team: linux-systems
       annotations:
-        title: CPU saturation is high.
         summary: CPU saturation is high.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           CPU saturation is high for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.

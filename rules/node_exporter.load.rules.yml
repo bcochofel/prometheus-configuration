@@ -13,12 +13,9 @@ groups:
       for: 15m
       labels:
         severity: warning
-        team: devops
+        team: linux-systems
       annotations:
-        title: Load average usage warning.
         summary: Load average usage warning.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           Load average is above 4 for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}.
@@ -31,13 +28,10 @@ groups:
         )
       for: 15m
       labels:
-        severity: warning
-        team: devops
+        severity: critical
+        team: linux-systems
       annotations:
-        title: Load average usage is high.
         summary: Load average usage is high.
-        runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-        graph: 'http://grafana.example.com'
         description: |
           Load average is above 7 for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}.
