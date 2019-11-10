@@ -19,7 +19,7 @@ rule_files:
 #    # to test reading even when local Prometheus has the data
 #    read_recent: true
 #remote_write:
-#  - url: 'http://m3db-server:7201/api/v1/prom/remote/write
+#  - url: 'http://m3db-server:7201/api/v1/prom/remote/write'
 
 scrape_configs:
   # prometheus targets

@@ -1,0 +1,15 @@
+groups:
+# Rules for Telegraf
+- name: Telegraf rules
+  rules:
+  # Telegraf is down
+  - alert: Telegraf-ServiceDown
+    expr: up{job="telegraf"} == 0
+    for: 5m
+    labels:
+      severity: critical
+      team: linux-systems
+    annotations:
+      summary: Telegraf service is down.
+      description: |
+        Telegraf service is down for the past 5m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).

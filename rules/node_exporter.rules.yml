@@ -3,16 +3,13 @@ groups:
 - name: Node Exporter rules
   rules:
   # Node Exporter is down
-  - alert: NodeExporterDown
-    expr: up{job="node-exporter"} == 0
+  - alert: NodeExporter-ServiceDown
+    expr: up{job="node_exporter"} == 0
     for: 5m
     labels:
       severity: critical
-      team: devops
+      team: linux-systems
     annotations:
-      title: Node exporter down.
-      runbook: 'http://runbooks.example.com/node_exporter_alerts.md'
-      graph: 'http://grafana.example.com'
-      summary: Node exporter down.
+      summary: Node exporter service is down.
       description: |
-        Node exporter down for the past 5m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+        Node exporter service is down for the past 5m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
