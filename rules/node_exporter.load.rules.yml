@@ -5,10 +5,10 @@ groups:
     ### LOAD alerts ###
     
     # Load warning value
-    - alert: Load-WarnUsage
+    - alert: Load-Average
       expr: >
         avg by (instance, host) (
-          (node_load5 / (count without (cpu, mode) (node_cpu_seconds_total{mode="idle"}))) > 4
+          (node_load1 / (count without (cpu, mode) (node_cpu_seconds_total{mode="idle"}))) > 4
         )
       for: 15m
       labels:
@@ -21,17 +21,17 @@ groups:
           Current value is {{ printf "%.2f" $value }}.
 
     # Load high value
-    - alert: Load-HighUsage
+    - alert: Load-Average
       expr: >
         avg by (instance, host) (
-          (node_load5 / (count without (cpu, mode) (node_cpu_seconds_total{mode="idle"}))) > 7
+          (node_load1 / (count without (cpu, mode) (node_cpu_seconds_total{mode="idle"}))) > 7
         )
       for: 15m
       labels:
         severity: critical
         team: linux-systems
       annotations:
-        summary: Load average usage is high.
+        summary: Load average usage is very high.
         description: |
           Load average is above 7 for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}.
