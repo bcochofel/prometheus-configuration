@@ -1,5 +1,6 @@
 global:
-  slack_api_url: '<slack_webhook_url>'
+  # change this to your API token and uncomment
+  #slack_api_url: '<slack_webhook_url>'
 
 route:
   group_by: [alertname]
