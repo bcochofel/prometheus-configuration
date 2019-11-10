@@ -1,0 +1,36 @@
+global:
+  slack_api_url: '<slack_webhook_url>'
+
+route:
+  group_by: [alertname]
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'slack-notifications'
+  routes:
+    - match:
+        team: linux-systems
+      receiver: 'slack-notifications'
+
+# Inhibition rules allow to mute a set of alerts given that another alert is
+# firing.
+# We use this to mute any warning-level notifications if the same alert is 
+# already critical.
+inhibit_rules:
+- source_match:
+    severity: 'critical'
+  target_match:
+    severity: 'warning'
+  # Apply inhibition if the alertname is the same.
+  equal: ['alertname']
+
+receivers:
+- name: 'slack-notifications'
+  slack_configs:
+  - channel: '#alertmanager'
+    send_resolved: true
+    title: '{{ template "slack.default.title" . }}'
+    text: '{{ template "slack.default.text" . }}'
+
+templates:
+  - '/etc/alertmanager/templates/default.tmpl'

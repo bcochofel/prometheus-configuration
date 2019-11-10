@@ -1,13 +1,13 @@
 global:
-  scrape_interval:     15s
+  scrape_interval: 15s
   evaluation_interval: 15s
   #external_labels:
   #  dc: dc1
 
 alerting:
   alertmanagers:
-    - static_configs:
-      - targets: ['localhost:9093']
+  - static_configs:
+    - targets: ['localhost:9093']
 
 # load rules files
 rule_files:
