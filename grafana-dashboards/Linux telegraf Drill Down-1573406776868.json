@@ -61,7 +61,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1573406012952,
+  "iteration": 1573406771140,
   "links": [
     {
       "asDropdown": true,
@@ -1313,7 +1313,7 @@
       "valueName": "current"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": "${DS_M3DB-PROMETHEUS}",
       "gridPos": {
         "h": 1,
@@ -1322,286 +1322,285 @@
         "y": 12
       },
       "id": 14,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "description": "Basic CPU info",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 13
-          },
-          "id": 66,
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "cpu_usage_user{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "User",
-              "refId": "B"
-            },
-            {
-              "expr": "cpu_usage_system{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "System",
-              "refId": "A"
-            },
-            {
-              "expr": "cpu_usage_idle{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "legendFormat": "Idle",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "CPU Basic",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {
-            "Apps": "#629E51",
-            "Buffers": "#614D93",
-            "Cache": "#6D1F62",
-            "Cached": "#511749",
-            "Committed": "#508642",
-            "Free": "#0A437C",
-            "Harware Corrupted - Amount of RAM that the kernel identified as corrupted / not working": "#CFFAFF",
-            "Inactive": "#584477",
-            "PageTables": "#0A50A1",
-            "Page_Tables": "#0A50A1",
-            "RAM_Free": "#E0F9D7",
-            "SWAP Used": "#BF1B00",
-            "Slab": "#806EB7",
-            "Slab_Cache": "#E0752D",
-            "Swap": "#BF1B00",
-            "Swap Used": "#BF1B00",
-            "Swap_Cache": "#C15C17",
-            "Swap_Free": "#2F575E",
-            "Unused": "#EAB839"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "decimals": 2,
-          "description": "Basic memory usage",
-          "fill": 4,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 13
-          },
-          "id": 54,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": 350,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "maxPerRow": 6,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "RAM Total",
-              "color": "#E0F9D7",
-              "fill": 0,
-              "stack": false
-            },
-            {
-              "alias": "RAM Cache + Buffer",
-              "color": "#052B51"
-            },
-            {
-              "alias": "RAM Free",
-              "color": "#7EB26D"
-            },
-            {
-              "alias": "Avaliable",
-              "color": "#DEDAF7",
-              "fill": 0,
-              "stack": false
-            }
-          ],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "mem_total{instance=~\"$node:$port\",job=~\"$job\"}",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "RAM Total",
-              "refId": "A",
-              "step": 240
-            },
-            {
-              "expr": "mem_total{instance=~\"$node:$port\",job=~\"$job\"} - mem_free{instance=~\"$node:$port\",job=~\"$job\"} - (mem_cached{instance=~\"$node:$port\",job=~\"$job\"} + mem_buffered{instance=~\"$node:$port\",job=~\"$job\"})",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "RAM Used",
-              "refId": "D",
-              "step": 240
-            },
-            {
-              "expr": "mem_cached{instance=~\"$node:$port\",job=~\"$job\"} + mem_buffered{instance=~\"$node:$port\",job=~\"$job\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "RAM Cache + Buffer",
-              "refId": "B",
-              "step": 240
-            },
-            {
-              "expr": "mem_free{instance=~\"$node:$port\",job=~\"$job\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "RAM Free",
-              "refId": "F",
-              "step": 240
-            },
-            {
-              "expr": "(swap_total{instance=~\"$node:$port\",job=~\"$job\"} - swap_free{instance=~\"$node:$port\",job=~\"$job\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "SWAP Used",
-              "refId": "G",
-              "step": 240
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Memory Basic",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "Basic CPU / Mem Graph",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "description": "Basic CPU info",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 66,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "cpu_usage_user{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "User",
+          "refId": "B"
+        },
+        {
+          "expr": "cpu_usage_system{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "System",
+          "refId": "A"
+        },
+        {
+          "expr": "cpu_usage_idle{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "Idle",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Basic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "Apps": "#629E51",
+        "Buffers": "#614D93",
+        "Cache": "#6D1F62",
+        "Cached": "#511749",
+        "Committed": "#508642",
+        "Free": "#0A437C",
+        "Harware Corrupted - Amount of RAM that the kernel identified as corrupted / not working": "#CFFAFF",
+        "Inactive": "#584477",
+        "PageTables": "#0A50A1",
+        "Page_Tables": "#0A50A1",
+        "RAM_Free": "#E0F9D7",
+        "SWAP Used": "#BF1B00",
+        "Slab": "#806EB7",
+        "Slab_Cache": "#E0752D",
+        "Swap": "#BF1B00",
+        "Swap Used": "#BF1B00",
+        "Swap_Cache": "#C15C17",
+        "Swap_Free": "#2F575E",
+        "Unused": "#EAB839"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "decimals": 2,
+      "description": "Basic memory usage",
+      "fill": 4,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 54,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 350,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 6,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "RAM Total",
+          "color": "#E0F9D7",
+          "fill": 0,
+          "stack": false
+        },
+        {
+          "alias": "RAM Cache + Buffer",
+          "color": "#052B51"
+        },
+        {
+          "alias": "RAM Free",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "Avaliable",
+          "color": "#DEDAF7",
+          "fill": 0,
+          "stack": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "mem_total{instance=~\"$node:$port\",job=~\"$job\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "RAM Total",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "expr": "mem_total{instance=~\"$node:$port\",job=~\"$job\"} - mem_free{instance=~\"$node:$port\",job=~\"$job\"} - (mem_cached{instance=~\"$node:$port\",job=~\"$job\"} + mem_buffered{instance=~\"$node:$port\",job=~\"$job\"})",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "RAM Used",
+          "refId": "D",
+          "step": 240
+        },
+        {
+          "expr": "mem_cached{instance=~\"$node:$port\",job=~\"$job\"} + mem_buffered{instance=~\"$node:$port\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "RAM Cache + Buffer",
+          "refId": "B",
+          "step": 240
+        },
+        {
+          "expr": "mem_free{instance=~\"$node:$port\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "RAM Free",
+          "refId": "F",
+          "step": 240
+        },
+        {
+          "expr": "(swap_total{instance=~\"$node:$port\",job=~\"$job\"} - swap_free{instance=~\"$node:$port\",job=~\"$job\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "SWAP Used",
+          "refId": "G",
+          "step": 240
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Basic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "collapsed": true,
@@ -1610,7 +1609,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 20
       },
       "id": 16,
       "panels": [
@@ -1880,468 +1879,467 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": "${DS_M3DB-PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 21
       },
       "id": 2,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "gridPos": {
-            "h": 6,
-            "w": 4,
-            "x": 0,
-            "y": 15
-          },
-          "id": 64,
-          "links": [],
-          "options": {
-            "fieldOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "defaults": {
-                "mappings": [
-                  {
-                    "id": 0,
-                    "op": "=",
-                    "text": "N/A",
-                    "type": 1,
-                    "value": "null"
-                  }
-                ],
-                "max": 100,
-                "min": 0,
-                "nullValueMode": "connected",
-                "thresholds": [
-                  {
-                    "color": "#299c46",
-                    "value": null
-                  },
-                  {
-                    "color": "rgba(237, 129, 40, 0.89)",
-                    "value": 80
-                  },
-                  {
-                    "color": "#d44a3a",
-                    "value": 90
-                  }
-                ],
-                "unit": "percent"
-              },
-              "override": {},
-              "values": false
-            },
-            "orientation": "horizontal",
-            "showThresholdLabels": true,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "6.4.4",
-          "targets": [
-            {
-              "expr": "sum(100-cpu_usage_idle{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"})",
-              "format": "time_series",
-              "instant": true,
-              "intervalFactor": 1,
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "title": "CPU Used",
-          "type": "gauge"
-        },
-        {
-          "aliasColors": {
-            "Busy": "#EAB839",
-            "Busy Iowait": "#890F02",
-            "Busy other": "#1F78C1",
-            "Idle": "#052B51",
-            "Idle - Waiting for something to happen": "#052B51",
-            "guest": "#9AC48A",
-            "idle": "#052B51",
-            "iowait": "#EAB839",
-            "irq": "#BF1B00",
-            "nice": "#C15C17",
-            "softirq": "#E24D42",
-            "steal": "#FCE2DE",
-            "system": "#508642",
-            "user": "#5195CE"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "decimals": 2,
-          "description": "Total CPU %",
-          "fill": 4,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 20,
-            "x": 4,
-            "y": 15
-          },
-          "id": 52,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": 250,
-            "sort": null,
-            "sortDesc": null,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "maxPerRow": 6,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": true,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "Busy Iowait",
-              "color": "#890F02"
-            },
-            {
-              "alias": "Idle",
-              "color": "#7EB26D"
-            },
-            {
-              "alias": "Busy System",
-              "color": "#EAB839"
-            },
-            {
-              "alias": "Busy User",
-              "color": "#0A437C"
-            },
-            {
-              "alias": "Busy Other",
-              "color": "#6D1F62"
-            }
-          ],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_system{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "Busy System",
-              "refId": "B",
-              "step": 240
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_user{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "Busy User",
-              "refId": "D",
-              "step": 240
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_iowait{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy IOWait",
-              "refId": "E",
-              "step": 240
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_irq{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy IRQs",
-              "refId": "F",
-              "step": 240
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_idle{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Idle",
-              "refId": "C",
-              "step": 240
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_guest{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Busy Guest",
-              "refId": "A"
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_nice{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy Nice",
-              "refId": "G"
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_softirq{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy Soft IRQs",
-              "refId": "H"
-            },
-            {
-              "expr": "sum by (instance)(rate(cpu_usage_steal{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy Steal",
-              "refId": "I"
-            },
-            {
-              "expr": "sum by (instance)(rate(usage_guest_nice{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Busy Guest Nice",
-              "refId": "J"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "CPU Total %",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 0,
-            "y": 21
-          },
-          "id": 60,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "cpu_usage_user{instance=\"$node:$port\", cpu!=\"cpu-total\"}",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{cpu}}",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "CPU Cores - User",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_M3DB-PROMETHEUS}",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 12,
-            "y": 21
-          },
-          "id": 62,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "cpu_usage_system{instance=\"$node:$port\", cpu!=\"cpu-total\"}",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{cpu}}",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "CPU Cores - System",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "repeat": null,
       "title": "CPU Input Plugin",
       "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 22
+      },
+      "id": 64,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 84.9995
+              },
+              {
+                "color": "#d44a3a",
+                "value": 95
+              }
+            ],
+            "unit": "percent"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.4",
+      "targets": [
+        {
+          "expr": "sum(100-cpu_usage_idle{instance=\"$node:$port\", cpu=\"cpu-total\",job=~\"$job\"})",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Used",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {
+        "Busy": "#EAB839",
+        "Busy Iowait": "#890F02",
+        "Busy other": "#1F78C1",
+        "Idle": "#052B51",
+        "Idle - Waiting for something to happen": "#052B51",
+        "guest": "#9AC48A",
+        "idle": "#052B51",
+        "iowait": "#EAB839",
+        "irq": "#BF1B00",
+        "nice": "#C15C17",
+        "softirq": "#E24D42",
+        "steal": "#FCE2DE",
+        "system": "#508642",
+        "user": "#5195CE"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "decimals": 2,
+      "description": "Total CPU %",
+      "fill": 4,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 20,
+        "x": 4,
+        "y": 22
+      },
+      "id": 52,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 250,
+        "sort": null,
+        "sortDesc": null,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 6,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": true,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Busy Iowait",
+          "color": "#890F02"
+        },
+        {
+          "alias": "Idle",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "Busy System",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "Busy User",
+          "color": "#0A437C"
+        },
+        {
+          "alias": "Busy Other",
+          "color": "#6D1F62"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_system{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "Busy System",
+          "refId": "B",
+          "step": 240
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_user{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "Busy User",
+          "refId": "D",
+          "step": 240
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_iowait{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy IOWait",
+          "refId": "E",
+          "step": 240
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_irq{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy IRQs",
+          "refId": "F",
+          "step": 240
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_idle{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Idle",
+          "refId": "C",
+          "step": 240
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_guest{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "Busy Guest",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_nice{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy Nice",
+          "refId": "G"
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_softirq{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy Soft IRQs",
+          "refId": "H"
+        },
+        {
+          "expr": "sum by (instance)(rate(cpu_usage_steal{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy Steal",
+          "refId": "I"
+        },
+        {
+          "expr": "sum by (instance)(rate(usage_guest_nice{cpu=\"cpu-total\",instance=~\"$node:$port\",job=~\"$job\"}[5m])) * 100",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Busy Guest Nice",
+          "refId": "J"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Total %",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "id": 60,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "cpu_usage_user{instance=\"$node:$port\", cpu!=\"cpu-total\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{cpu}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Cores - User",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_M3DB-PROMETHEUS}",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "id": 62,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "cpu_usage_system{instance=\"$node:$port\", cpu!=\"cpu-total\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{cpu}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Cores - System",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "collapsed": true,
@@ -2350,7 +2348,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 34
       },
       "id": 10,
       "panels": [
@@ -3407,7 +3405,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 35
       },
       "id": 4,
       "panels": [
@@ -3974,7 +3972,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 36
       },
       "id": 195,
       "panels": [
@@ -4670,7 +4668,7 @@
       "type": "row"
     }
   ],
-  "refresh": "1m",
+  "refresh": "30s",
   "schemaVersion": 20,
   "style": "dark",
   "tags": [
@@ -4825,5 +4823,5 @@
   "timezone": "",
   "title": "Linux telegraf Drill Down",
   "uid": "JkMWGX2Zk",
-  "version": 6
+  "version": 7
 }

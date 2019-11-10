@@ -54,7 +54,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1573406261631,
+  "iteration": 1573406758465,
   "links": [
     {
       "asDropdown": true,
@@ -1338,7 +1338,7 @@
       "type": "bargauge"
     }
   ],
-  "refresh": "1m",
+  "refresh": "30s",
   "schemaVersion": 20,
   "style": "dark",
   "tags": [
@@ -1427,5 +1427,5 @@
   "timezone": "",
   "title": "Linux node_exporter USE Method",
   "uid": "R-crlzGWz",
-  "version": 2
+  "version": 3
 }
