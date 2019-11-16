@@ -1,0 +1,7 @@
+alertmanager:
+  interval: 30s
+  servers:
+    - name: alertmanager
+      uri: http://alertmanager.service.consul:9093
+      timeout: 10s
+      proxy: true

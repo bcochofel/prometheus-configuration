@@ -1,0 +1,59 @@
+apiVersion: 1
+
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: Prometheus
+    orgId: 1
+  - name: M3DB-Prometheus
+    orgId: 1
+  - name: M3DB-Graphite
+    orgId: 1
+
+# list of datasources to insert/update depending
+# whats available in the database
+datasources:
+- name: M3DB-Prometheus
+  type: prometheus
+  access: proxy
+  orgId: 1
+  url: http://manager:7201
+  password:
+  user:
+  database:
+  basicAuth:
+  basicAuthUser: 
+  basicAuthPassword: 
+  withCredentials:
+  isDefault: true
+  version: 1
+  editable: true
+- name: M3DB-Graphite
+  type: graphite
+  access: proxy
+  orgId: 1
+  url: http://manager:7201/api/v1/graphite
+  password:
+  user:
+  database:
+  basicAuth:
+  basicAuthUser: 
+  basicAuthPassword: 
+  withCredentials:
+  isDefault: false
+  version: 1
+  editable: true
+- name: Prometheus
+  type: prometheus
+  access: proxy
+  orgId: 1
+  url: http://prometheus.service.consul:9090
+  password:
+  user:
+  database:
+  basicAuth:
+  basicAuthUser: 
+  basicAuthPassword: 
+  withCredentials:
+  isDefault: false
+  version: 1
+  editable: true
