@@ -1,0 +1,74 @@
+version: '3.1'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/prometheus
+      - ./data/prometheus:/data
+    command:
+      - '--config.file=/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+    ports:
+      - 9090:9090
+    depends_on:
+      - alertmanager
+    restart: always
+    networks:
+      - promnet
+
+  alertmanager:
+    image: prom/alertmanager
+    volumes:
+      - ./alertmanager:/alertmanager
+      - ./data/alertmanager:/data
+    command:
+      - '--config.file=/alertmanager/alertmanager.yml'
+      - '--storage.path=/data'
+    ports:
+      - 9093:9093
+    networks:
+      - promnet
+
+  karma:
+    image: lmierzwa/karma
+    volumes:
+      - ./karma:/karma
+    command:
+      - '--config.file /karma/karma.yml'
+    ports:
+      - "8888:8080"
+    networks:
+      - promnet
+
+  alerta:
+    image: alerta/alerta-web
+    ports:
+      - 9080:8080
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1  # remove this line to turn DEBUG off
+      - DATABASE_URL=mongodb://db:27017/monitoring
+      # - AUTH_REQUIRED=True
+      - ADMIN_USERS=admin@alerta.io
+      - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
+      - ALERTMANAGER_API_URL=http://alertmanager:9093
+    restart: always
+    networks:
+      - promnet
+      - dbnet
+
+  db:
+    image: mongo
+    volumes:
+      - ./data/mongodb:/data/db
+    restart: always
+    networks:
+      - dbnet
+
+networks:
+  promnet:
+    driver: bridge
+  dbnet:
+    driver: bridge

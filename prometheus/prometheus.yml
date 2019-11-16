@@ -7,7 +7,8 @@ global:
 alerting:
   alertmanagers:
   - static_configs:
-    - targets: ['localhost:9093']
+    - targets:
+      - alertmanager:9093
 
 # load rules files
 rule_files:
@@ -25,21 +26,21 @@ scrape_configs:
   # prometheus targets
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['prometheus:9090']
   
   # alertmanager targets
   - job_name: 'alertmanager'
     static_configs:
-      - targets: ['localhost:9093']
+      - targets: ['alertmanager:9093']
 
   # node_exporter targets
   - job_name: 'node_exporter'
     file_sd_configs:
       - files:
-        - /etc/prometheus/node_exporter-targets.json
+        - /prometheus/node_exporter-targets.json
 
   # telegraf targets
   - job_name: 'telegraf'
     file_sd_configs:
       - files:
-        - /etc/prometheus/telegraf-targets.json
+        - /prometheus/telegraf-targets.json
