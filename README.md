@@ -10,6 +10,7 @@ This repository can be used to create a monitoring stack based on the following 
 - Karma
 
 There's a ```docker-compose``` that can be used to deploy every component using docker.
+All the services on the ```docker-compose``` have health-checks.
 
 ## Prometheus
 
@@ -24,17 +25,45 @@ Rules are under ```./prometheus/rules```.
 There's a file ```prometheus-consul.yml``` that uses Consul has a Service Discovery and also creates job name.
 For this to be done automatically you just need to register the service on Consul and add the ```prometheus``` tag.
 
+Prometheus is listening on port 9090.
+
 ## Alertmanager
 
+The default configuration sends alerts using webhooks to Alerta and Karma gets also alerts from Alertmanager automatically.
+For Slack integration change the ```alertmanager/alertmanager.yml``` file.
+
+Alertmanager is listening on port 9093.
+
 ## Pushgateway
+
+The Pushgateway has the default configuration.
+
+Pushgateway is listening on port 9091.
 
 ## Grafana
 
 ## Alerta
 
+Default configuration with MongoDB has database.
+
+Alerta is listening on port 8080.
+
 ## Karma
 
+Default configuration gets alerts from Alertmanager.
+
+Karma is listening on port 8888.
+
+# Long-Term-Storage
+
 # High-Availability
+
+# TODO
+
+- Configuration for Alerta
+- Alerta/Karma prometheus metrics
+- Grafana Provisioning with defaullt datasources and dashboards
+- Steps for HA
 
 # External Links
 
