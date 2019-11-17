@@ -1,32 +1,44 @@
-version: '3.1'
+version: '3.7'
+
+volumes:
+    prometheus_data: {}
+    alertmanager_data: {}
 
 services:
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
     volumes:
-      - ./prometheus:/prometheus
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
     command:
-      - '--config.file=/prometheus/prometheus.yml'
-      - '--storage.tsdb.retention.time=1d'
-      - '--web.enable-admin-api'
-      - '--web.enable-lifecycle'
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=24h'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - 9090:9090
     networks:
       - promnet
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/-/healthy"]
 
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:latest
     volumes:
-      - ./alertmanager:/alertmanager
+      - ./alertmanager:/etc/alertmanager
+      - alertmanager_data:/alertmanager
     command:
-      - '--config.file=/alertmanager/alertmanager.yml'
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
     ports:
       - 9093:9093
     networks:
       - promnet
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9093/-/healthy"]
 
   karma:
     image: lmierzwa/karma
