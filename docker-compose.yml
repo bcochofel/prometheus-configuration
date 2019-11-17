@@ -5,30 +5,47 @@ services:
     image: prom/prometheus
     volumes:
       - ./prometheus:/prometheus
-      - ./data/prometheus:/data
     command:
       - '--config.file=/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/data'
+      - '--storage.tsdb.retention.time=1d'
+      - '--web.enable-admin-api'
+      - '--web.enable-lifecycle'
     ports:
       - 9090:9090
-    depends_on:
-      - alertmanager
-    restart: always
     networks:
       - promnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "/-/healthy"]
 
   alertmanager:
     image: prom/alertmanager
     volumes:
       - ./alertmanager:/alertmanager
-      - ./data/alertmanager:/data
     command:
       - '--config.file=/alertmanager/alertmanager.yml'
-      - '--storage.path=/data'
     ports:
       - 9093:9093
     networks:
       - promnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "/-/healthy"]
+
+  karma:
+    image: lmierzwa/karma
+    command:
+      - '--config.file /karma.yaml'
+    ports:
+      - 8888:8080
+    configs:
+      - source: karma/karma.yaml
+        target: /karma.yaml
+    networks:
+      - promnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "/health"]
 
   alerta:
     image: alerta/alerta-web
@@ -43,18 +60,18 @@ services:
       - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
       - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
       - ALERTMANAGER_API_URL=http://alertmanager:9093
-    restart: always
     networks:
       - promnet
       - dbnet
+    restart: unless-stopped
 
   db:
     image: mongo
     volumes:
       - ./data/mongodb:/data/db
-    restart: always
     networks:
       - dbnet
+    restart: unless-stopped
 
 networks:
   promnet:
