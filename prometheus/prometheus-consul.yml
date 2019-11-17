@@ -1,8 +1,8 @@
 global:
   scrape_interval:     30s
   evaluation_interval: 30s
-  external_labels:
-    alloc_name: '{{ env "NOMAD_ALLOC_NAME" }}'
+#  external_labels:
+#    alloc_name: '{{ env "NOMAD_ALLOC_NAME" }}'
 
 alerting:
   alert_relabel_configs:

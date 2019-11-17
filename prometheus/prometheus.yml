@@ -33,6 +33,11 @@ scrape_configs:
     static_configs:
       - targets: ['alertmanager:9093']
 
+  # karma target
+  - job_name: 'karma'
+    static_configs:
+      - targets: ['karma:8888']
+
   # node_exporter targets
   - job_name: 'node_exporter'
     file_sd_configs:

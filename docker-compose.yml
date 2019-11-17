@@ -45,12 +45,14 @@ services:
     volumes:
       - ./karma/karma.yaml:/karma.yaml
     command:
-      - '--config.file /karma.yaml'
+      - '--config.file=/karma.yaml'
     ports:
       - 8888:8080
     networks:
       - promnet
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
 
   alerta:
     image: alerta/alerta-web

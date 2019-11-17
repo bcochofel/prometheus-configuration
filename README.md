@@ -13,6 +13,17 @@ There's a ```docker-compose``` that can be used to deploy every component using 
 
 ## Prometheus
 
+Prometheus configuration collects metrics from Alertmanager, Karma, Pushgateway and Grafana using static config.
+If you want to add targets from node_exporter or telegraf you can create the following files under ```/etc/prometheus```:
+
+- /etc/prometheus/node_exporter-targets.json
+- /etc/prometheus/telegraf-targets.json
+
+Rules are under ```./prometheus/rules```.
+
+There's a file ```prometheus-consul.yml``` that uses Consul has a Service Discovery and also creates job name.
+For this to be done automatically you just need to register the service on Consul and add the ```prometheus``` tag.
+
 ## Alertmanager
 
 ## Pushgateway
@@ -22,6 +33,8 @@ There's a ```docker-compose``` that can be used to deploy every component using 
 ## Alerta
 
 ## Karma
+
+# High-Availability
 
 # External Links
 
