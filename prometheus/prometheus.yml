@@ -27,6 +27,11 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: ['prometheus:9090']
+
+  # pushgateway
+  - job_name: 'pushgateway'
+    static_configs:
+      - targets: ['pushgateway:9091']
   
   # alertmanager targets
   - job_name: 'alertmanager'
