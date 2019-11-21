@@ -16,10 +16,11 @@ groups:
 
   # Low Disk space
   - alert: Filesystem-DiskSpace
-    expr: (
-      node_filesystem_avail_bytes{fstype=~"(ext.|xfs)"} /
-      node_filesystem_size_bytes{fstype=~"(ext.|xfs)"}
-    ) * 100 <= 20
+    expr: >
+      (
+        node_filesystem_avail_bytes{fstype=~"(ext.|xfs)"} /
+        node_filesystem_size_bytes{fstype=~"(ext.|xfs)"}
+      ) * 100 <= 20
     for: 15m
     labels:
       severity: warning
@@ -31,10 +32,11 @@ groups:
 
   # No Disk space
   - alert: Filesystem-LowDiskSpace
-    expr: (
-      node_filesystem_avail_bytes{fstype=~"(ext.|xfs)"} /
-      node_filesystem_size_bytes{fstype=~"(ext.|xfs)"}
-    ) * 100 <= 10
+    expr: >
+      (
+        node_filesystem_avail_bytes{fstype=~"(ext.|xfs)"} /
+        node_filesystem_size_bytes{fstype=~"(ext.|xfs)"}
+      ) * 100 <= 10
     for: 15m
     labels:
       severity: critical
@@ -46,10 +48,11 @@ groups:
 
   # High Inode usage
   - alert: Filesystem-InodeUsage
-    expr: (
-      node_filesystem_files_free{fstype=~"(ext.|xfs)"} / 
-      node_filesystem_files{fstype=~"(ext.|xfs)"}
-    ) * 100 <= 20
+    expr: >
+      (
+        node_filesystem_files_free{fstype=~"(ext.|xfs)"} / 
+        node_filesystem_files{fstype=~"(ext.|xfs)"}
+      ) * 100 <= 20
     for: 15m
     labels:
       severity: critical
