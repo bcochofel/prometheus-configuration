@@ -1,0 +1,39 @@
+groups:
+# Rules for Network
+- name: Node Exporter Network rules
+  rules:
+  # Number of Bonding Slaves
+  - alert: Network-BondingSlaves
+    expr: node_bonding_slaves < 2
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Number of Bonding Slaves below 2.
+      description: |
+        Number of Bonding Slaves below 2 for interface {{ "{{" }} $labels.master {{ "}}" }} for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+
+  # Unusual Network Throughput In
+  - alert: Network-ThroughputIn
+    expr: sum by (instance) (irate(node_network_receive_bytes_total[2m])) / 1024 / 1024 > 100
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual network throughput In.
+      description: |
+        Host network interfaces are probably receiving too much data (> 100 MB/s) for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+
+  # Unusual Network Throughput Out
+  - alert: Network-ThroughputOut
+    expr: sum by (instance) (irate(node_network_transmit_bytes_total[2m])) / 1024 / 1024 > 100
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual network throughput Out.
+      description: |
+        Host network interfaces are probably sending too much data (> 100 MB/s) for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).

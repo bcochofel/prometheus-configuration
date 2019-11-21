@@ -1,0 +1,51 @@
+groups:
+# Rules for Disk
+- name: Node Exporter Disk rules
+  rules:
+  # Unusual disk read rate
+  - alert: Disk-ReadRate
+    expr: sum by (instance) (irate(node_disk_read_bytes_total[5m])) / 1024 / 1024 > 500
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual disk read rate.
+      description: |
+        Disk is probably reading too much data (> 500MB/s) for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+
+  # Unusual disk write rate
+  - alert: Disk-WriteRate
+    expr: sum by (instance) (irate(node_disk_written_bytes_total[5m])) / 1024 / 1024 > 500
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual disk write rate.
+      description: |
+        Disk is probably writing too much data (> 500MB/s) for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+
+  # Unusual disk read latency
+  - alert: Disk-ReadLatency
+    expr: rate(node_disk_read_time_seconds_total[1m]) / rate(node_disk_reads_completed_total[1m]) > 100
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual disk read latency.
+      description: |
+        Disk latency is growing (read operations > 100ms) for the last 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+
+  # Unusual disk write latency
+  - alert: Disk-WriteLatency
+    expr: rate(node_disk_write_time_seconds_total[1m]) / rate(node_disk_writes_completed_total[1m]) > 100
+    for: 30m
+    labels:
+      severity: warning
+      team: linux-systems
+    annotations:
+      summary: Unusual disk write latency.
+      description: |
+        Disk latency is growing (write operations > 100ms) for the past 30m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
