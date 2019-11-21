@@ -2,11 +2,6 @@ groups:
 # Rules for filesystem
 - name: Node Exporter Filesystem rules
   rules:
-  - record: instance:node_filesystem_avail:ratio
-    expr: node_filesystem_avail_bytes{device=~"/dev/.+"} / node_filesystem_size_bytes{device=~"/dev/.+"}
-
-  # Filesystem alerts
-
   # Filesystem Full Soon
   - alert: Filesystem-FullSoon
     expr: predict_linear(node_filesystem_avail_bytes{fstype=~"(ext.|xfs)"}[6h], 24 * 3600) < 0
