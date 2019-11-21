@@ -4,7 +4,7 @@ groups:
   rules:
   # Unusual disk read rate
   - alert: Disk-ReadRate
-    expr: sum by (instance) (irate(node_disk_read_bytes_total[5m])) / 1024 / 1024 > 500
+    expr: sum by (instance,host) (irate(node_disk_read_bytes_total[5m])) / 1024 / 1024 > 500
     for: 30m
     labels:
       severity: warning
@@ -16,7 +16,7 @@ groups:
 
   # Unusual disk write rate
   - alert: Disk-WriteRate
-    expr: sum by (instance) (irate(node_disk_written_bytes_total[5m])) / 1024 / 1024 > 500
+    expr: sum by (instance,host) (irate(node_disk_written_bytes_total[5m])) / 1024 / 1024 > 500
     for: 30m
     labels:
       severity: warning
