@@ -16,6 +16,8 @@ services:
       - '--storage.tsdb.retention.time=24h'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
     ports:
       - 9090:9090
     networks:
@@ -42,6 +44,7 @@ services:
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
+#      - '--cluster.peer=alertmanager2:9094'
     ports:
       - 9093:9093
     networks:
