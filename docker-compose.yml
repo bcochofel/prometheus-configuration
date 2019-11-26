@@ -47,6 +47,7 @@ services:
 #      - '--cluster.peer=alertmanager2:9094'
     ports:
       - 9093:9093
+#      - 9094:9094
     networks:
       - promnet
     restart: unless-stopped
