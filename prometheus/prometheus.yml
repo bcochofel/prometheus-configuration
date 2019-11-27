@@ -44,6 +44,11 @@ scrape_configs:
     static_configs:
       - targets: ['karma:8080']
 
+#  # m3db target
+#  - job_name: 'm3'
+#    static_configs:
+#      - targets: ['m3db-server:7203']
+
   # node_exporter targets
   - job_name: 'node_exporter'
     file_sd_configs:
