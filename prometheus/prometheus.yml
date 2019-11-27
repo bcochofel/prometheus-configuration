@@ -9,6 +9,7 @@ alerting:
   - static_configs:
     - targets:
       - alertmanager:9093
+#      - alertmanager2:9093
 
 # load rules files
 rule_files:
@@ -41,7 +42,7 @@ scrape_configs:
   # karma target
   - job_name: 'karma'
     static_configs:
-      - targets: ['karma:8888']
+      - targets: ['karma:8080']
 
   # node_exporter targets
   - job_name: 'node_exporter'
