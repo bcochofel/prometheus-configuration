@@ -8,7 +8,7 @@ deleteDatasources:
 # list of datasources to insert/update depending
 # whats available in the database
 datasources:
-- name: PrometheusLTS
+- name: Prometheus
   type: prometheus
   access: proxy
   orgId: 1
