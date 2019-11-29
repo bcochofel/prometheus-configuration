@@ -2,7 +2,7 @@ apiVersion: 1
 
 # list of datasources that should be deleted from the database
 deleteDatasources:
-  - name: PrometheusLTS
+  - name: Prometheus
     orgId: 1
 
 # list of datasources to insert/update depending
@@ -12,7 +12,7 @@ datasources:
   type: prometheus
   access: proxy
   orgId: 1
-  url: http://${PROM_LTS_SERVER}:7201
+  url: http://${PROM_SERVER_ADDR}:${PROM_SERVER_PORT}
   password:
   user:
   database:
