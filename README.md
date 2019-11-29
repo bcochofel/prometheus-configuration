@@ -46,13 +46,13 @@ Pushgateway is listening on port 9091.
 
 Default configuration with MongoDB has database.
 
-Alerta is listening on port 8080.
+Alerta is listening on port 8888.
 
 ## Karma
 
 Default configuration gets alerts from Alertmanager.
 
-Karma is listening on port 8888.
+Karma is listening on port 8080.
 
 # Long-Term-Storage
 
@@ -61,8 +61,7 @@ Karma is listening on port 8888.
 # TODO
 
 - Configuration for Alerta
-- Alerta/Karma prometheus metrics
-- Grafana Provisioning with defaullt datasources and dashboards
+- Alerta prometheus metrics
 - Steps for HA
 
 # External Links
