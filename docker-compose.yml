@@ -3,6 +3,8 @@ version: '3.7'
 volumes:
     prometheus_data: {}
     alertmanager_data: {}
+    grafana_data: {}
+#    mongodb_data: {}
 
 services:
   prometheus:
@@ -55,7 +57,7 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:9093/-/healthy"]
 
   karma:
-    image: lmierzwa/karma
+    image: lmierzwa/karma:latest
     volumes:
       - ./karma/karma.yaml:/karma.yaml
     command:
@@ -68,33 +70,48 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
 
-  alerta:
-    image: alerta/alerta-web
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.grafana
     ports:
-      - 8080:8080
-    depends_on:
-      - db
-    environment:
-#      - DEBUG=1  # remove this line to turn DEBUG off
-      - DATABASE_URL=mongodb://db:27017/monitoring
-      - AUTH_REQUIRED=True
-      - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
-      - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
+      - 3000:3000
     networks:
       - promnet
-      - dbnet
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
 
-  db:
-    image: mongo
-    volumes:
-      - ./data/mongodb:/data/db
-    networks:
-      - dbnet
-    restart: unless-stopped
+#  alerta:
+#    image: alerta/alerta-web:latest
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - db
+#    environment:
+#      - DEBUG=1  # remove this line to turn DEBUG off
+#      - DATABASE_URL=mongodb://db:27017/monitoring
+#      - AUTH_REQUIRED=True
+#      - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
+#      - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
+#    networks:
+#      - promnet
+#      - dbnet
+#    restart: unless-stopped
+
+#  db:
+#    image: mongo/latest
+#    volumes:
+#      - mongodb_data:/data/db
+#    networks:
+#      - dbnet
+#    restart: unless-stopped
 
 networks:
   promnet:
     driver: bridge
-  dbnet:
-    driver: bridge
+#  dbnet:
+#    driver: bridge
