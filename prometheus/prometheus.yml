@@ -44,6 +44,11 @@ scrape_configs:
     static_configs:
       - targets: ['karma:8080']
 
+  # grafana target
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+
 #  # m3db target
 #  - job_name: 'm3'
 #    static_configs:
