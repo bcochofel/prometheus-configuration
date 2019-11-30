@@ -98,6 +98,7 @@ services:
       - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
       - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
       - ALERTMANAGER_API_URL=http://alertmanager:9093
+      - ALLOWED_ENVIRONMENTS=tst,dev,pp,prd,mgt
     networks:
       - promnet
       - dbnet
