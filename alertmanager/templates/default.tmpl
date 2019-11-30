@@ -1,4 +1,4 @@
-{{ define "slack.default.title" -}}
+{{ define "default.title" -}}
     {{- if .CommonAnnotations.summary -}}
         {{- .CommonAnnotations.summary -}}
     {{- else -}}
@@ -7,7 +7,7 @@
         {{- end -}}
     {{- end -}}
 {{- end }}
-{{ define "slack.default.text" -}}
+{{ define "default.text" -}}
     {{- if .CommonAnnotations.description -}}
         {{- .CommonAnnotations.description -}}
     {{- else -}}
