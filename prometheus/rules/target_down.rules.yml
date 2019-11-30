@@ -1,0 +1,15 @@
+groups:
+# General rules for Target
+- name: Target rules
+  rules:
+  # Target is down
+  - alert: Target-ServiceDown
+    expr: up == 0
+    for: 5m
+    labels:
+      severity: critical
+      team: linux-systems
+    annotations:
+      summary: Service {{ $labels.host }} is down.
+      description: |
+        Service {{ $labels.job }} is down for the past 5m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
