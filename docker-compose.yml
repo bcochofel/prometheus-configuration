@@ -68,7 +68,7 @@ services:
       - promnet
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
 
   grafana:
     image: grafana/grafana:latest
