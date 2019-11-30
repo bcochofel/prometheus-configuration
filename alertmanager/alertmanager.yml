@@ -41,4 +41,4 @@ receivers:
         password: alerta
 
 templates:
-  - '/alertmanager/templates/default.tmpl'
+  - '/etc/alertmanager/templates/default.tmpl'
