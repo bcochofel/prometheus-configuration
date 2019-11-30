@@ -85,30 +85,30 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
 
-#  alerta:
-#    image: alerta/alerta-web:latest
-#    ports:
-#      - 8888:8080
-#    depends_on:
-#      - db
-#    environment:
+  alerta:
+    image: alerta/alerta-web:latest
+    ports:
+      - 8888:8080
+    depends_on:
+      - db
+    environment:
 #      - DEBUG=1  # remove this line to turn DEBUG off
-#      - DATABASE_URL=mongodb://db:27017/monitoring
-#      - AUTH_REQUIRED=True
-#      - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
-#      - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
-#    networks:
-#      - promnet
-#      - dbnet
-#    restart: unless-stopped
+      - DATABASE_URL=mongodb://db:27017/monitoring
+      - AUTH_REQUIRED=True
+      - ADMIN_USERS=admin@alerta.io,devops@alerta.io #default password: alerta
+      - PLUGINS=remote_ip,reject,heartbeat,blackout,prometheus
+    networks:
+      - promnet
+      - dbnet
+    restart: unless-stopped
 
-#  db:
-#    image: mongo/latest
-#    volumes:
-#      - mongodb_data:/data/db
-#    networks:
-#      - dbnet
-#    restart: unless-stopped
+  db:
+    image: mongo/latest
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - dbnet
+    restart: unless-stopped
 
 networks:
   promnet:
