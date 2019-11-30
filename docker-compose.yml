@@ -4,7 +4,7 @@ volumes:
     prometheus_data: {}
     alertmanager_data: {}
     grafana_data: {}
-#    mongodb_data: {}
+    mongodb_data: {}
 
 services:
   prometheus:
@@ -113,5 +113,5 @@ services:
 networks:
   promnet:
     driver: bridge
-#  dbnet:
-#    driver: bridge
+  dbnet:
+    driver: bridge
