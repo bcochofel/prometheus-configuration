@@ -30,8 +30,8 @@ receivers:
 #  slack_configs:
 #  - channel: '#alertmanager'
 #    send_resolved: true
-#    title: '{{ template "default.title" . }}'
-#    text: '{{ template "default.text" . }}'
+#    title: '{{ template "slack.default.title" . }}'
+#    text: '{{ template "slack.default.text" . }}'
   webhook_configs:
   - url: 'http://alerta:8080/api/webhooks/prometheus'
     send_resolved: true
