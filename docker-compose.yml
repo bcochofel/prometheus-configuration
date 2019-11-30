@@ -103,7 +103,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: mongo/latest
+    image: mongo:latest
     volumes:
       - mongodb_data:/data/db
     networks:
