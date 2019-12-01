@@ -42,6 +42,10 @@ Pushgateway is listening on port 9091.
 
 ## Grafana
 
+Grafana is provisioned with datasource for Prometheus and some dashboards.
+
+Grafana is listening on port 3000.
+
 ## Alerta
 
 Default configuration with MongoDB has database.
@@ -56,12 +60,13 @@ Karma is listening on port 8080.
 
 # Long-Term-Storage
 
+If you want to have LTS install M3DB, uncomment prometheus.yml configuration and change the M3DB server.
+
 # TODO
 
 - Alerta health-check
 - MongoDB health-check
 - Alerta prometheus metrics
-- Steps for HA
 
 # External Links
 
