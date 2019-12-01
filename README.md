@@ -46,7 +46,7 @@ Pushgateway is listening on port 9091.
 
 Default configuration with MongoDB has database.
 
-Alerta is listening on port 8888.
+Alerta is listening on port 8088.
 
 ## Karma
 
@@ -56,11 +56,10 @@ Karma is listening on port 8080.
 
 # Long-Term-Storage
 
-# High-Availability
-
 # TODO
 
-- Configuration for Alerta
+- Alerta health-check
+- MongoDB health-check
 - Alerta prometheus metrics
 - Steps for HA
 
