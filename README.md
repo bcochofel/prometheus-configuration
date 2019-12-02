@@ -15,10 +15,10 @@ All the services on the ```docker-compose``` have health-checks.
 ## Prometheus
 
 Prometheus configuration collects metrics from Alertmanager, Karma, Pushgateway and Grafana using static config.
-If you want to add targets from node_exporter or telegraf you can create the following files under ```/etc/prometheus```:
+If you want to add targets from node_exporter or telegraf you can create the following files under ```./prometheus```:
 
-- /etc/prometheus/node_exporter-targets.json
-- /etc/prometheus/telegraf-targets.json
+- ./prometheus/node_exporter-targets.json
+- ./prometheus/telegraf-targets.json
 
 Rules are under ```./prometheus/rules```.
 
@@ -73,6 +73,11 @@ If you want to have LTS install M3DB, uncomment prometheus.yml configuration and
 - [Prometheus](https://github.com/prometheus/prometheus)
 - [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
 - [Pushgateway](https://github.com/prometheus/pushgateway)
-- [Grafana](https://grafana.com/)
+- [Node Exporter](https://github.com/prometheus/node_exporter)
+- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/)
+- [Provisioning Grafana](https://grafana.com/docs/administration/provisioning/)
 - [Alerta](https://alerta.io/)
 - [Karma](https://github.com/prymitive/karma)
+- [M3DB Single Node Deployment](https://m3db.github.io/m3/how_to/single_node/)
+- [Reloading Prometheus’ Configuration](https://www.robustperception.io/reloading-prometheus-configuration)
+- [Sending alert notifications to multiple destinations](https://www.robustperception.io/sending-alert-notifications-to-multiple-destinations)
