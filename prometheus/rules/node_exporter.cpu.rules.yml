@@ -61,3 +61,17 @@ groups:
         description: |
           CPU %iowait utilization is high for the past 15m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
           Current value is {{ printf "%.2f" $value }}%.
+
+    # CPU steal utilization
+    - alert: CPU-StealUtilization
+      expr: >
+        (avg by(instance, host) (irate(node_cpu_seconds_total{mode="steal"}[5m])) * 100) > 10
+      for: 20m
+      labels:
+        severity: warning
+        team: linux-systems
+      annotations:
+        summary: CPU %steal utilization is high.
+        description: |
+          CPU %steal utilization is high for the past 20m (host {{ if $labels.host }}{{ $labels.host }}{{ else }}{{ $labels.instance }}{{ end }}).
+          Current value is {{ printf "%.2f" $value }}%.
